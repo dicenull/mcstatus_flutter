@@ -1,29 +1,32 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:mcstatus_flutter/models/server_state.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mcstatus_flutter/atoms/named_counter.dart';
+import 'package:mcstatus_flutter/models/server_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextButton(
-          onPressed: () async {
-            final resp =
-                await http.get(Uri.https('mc.oykdn.com', 'status/api/servers'));
-
-            final json = ServerListState.fromJson(jsonDecode(resp.body));
-          },
-          child: Text('fetch'),
+    return Scaffold(
+      body: useProvider(serverProvider.state).when(
+        success: (data) => Center(
+          child: Column(
+            children: data.servers
+                .map((state) => NamedCounter(
+                      bgColor: Theme.of(context).accentColor,
+                      badgeColor:
+                          state.online ? Colors.green : Colors.redAccent,
+                      text: state.name,
+                      count: state.playerCount,
+                    ))
+                .toList(),
+          ),
         ),
-      ],
+        waiting: () => Center(
+          child: CircularProgressIndicator(),
+        ),
+        failure: (_) => Container(),
+      ),
     );
   }
 }

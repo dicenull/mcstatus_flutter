@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mcstatus_flutter/screens/home_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,9 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MC Status Flutter',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
       home: HomeScreen(),
     );
   }
