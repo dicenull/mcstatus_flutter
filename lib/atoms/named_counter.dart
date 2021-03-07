@@ -17,7 +17,8 @@ class NamedCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme =
-        Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white);
+        Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white);
+    final padding = const EdgeInsets.symmetric(horizontal: 4, vertical: 2);
 
     return PrimaryLabel(
       bgColor: bgColor,
@@ -27,7 +28,7 @@ class NamedCounter extends StatelessWidget {
           PrimaryLabel(
             bgColor: badgeColor,
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: padding,
               child: Text(
                 text,
                 style: textTheme,
@@ -35,7 +36,7 @@ class NamedCounter extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: padding,
             child: Text(
               count.toString(),
               style: textTheme,
