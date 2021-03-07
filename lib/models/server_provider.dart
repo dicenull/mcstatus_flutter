@@ -17,7 +17,9 @@ class ServerController extends StateNotifier<Result<ServerListState>>
     final resp =
         await http.get(Uri.https('mc.oykdn.com', 'status/api/servers'));
 
-    final data = ServerListState.fromJson(jsonDecode(resp.body));
+    final data = ServerListState.fromJson(
+      jsonDecode(utf8.decode(resp.bodyBytes)),
+    );
 
     state = Success<ServerListState>(data);
   }
