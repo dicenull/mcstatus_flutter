@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mcstatus_flutter/screens/home_screen.dart';
 
 void main() {
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MC Status Flutter',
+      theme: ThemeData(
+        textTheme: GoogleFonts.notoSansTextTheme(),
+      ),
       home: HomeScreen(),
     );
   }
