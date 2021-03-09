@@ -17,14 +17,14 @@ class HomeScreen extends HookWidget {
             child: ServerListBody(
               cardList: data.servers.map(
                 (state) => ServerCard(
-                    namedCounter: NamedCounter(
-                      bgColor: Theme.of(context).accentColor,
-                      badgeColor:
-                          state.online ? Colors.green : Colors.redAccent,
-                      text: state.name,
-                      count: state.playerCount,
-                    ),
-                    text: state.description),
+                  namedCounter: NamedCounter(
+                    bgColor: Theme.of(context).accentColor,
+                    badgeColor: state.online ? Colors.green : Colors.redAccent,
+                    text: state.name,
+                    count: state.playerCount,
+                  ),
+                  text: state.description,
+                ),
               ),
             ),
           ),

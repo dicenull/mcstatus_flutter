@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mcstatus_flutter/atoms/named_counter.dart';
+import 'package:mcstatus_flutter/minecraft_formatting/mc_format.dart';
 
 class ServerCard extends StatelessWidget {
   final NamedCounter namedCounter;
@@ -30,8 +31,8 @@ class ServerCard extends StatelessWidget {
             Flexible(
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: Text(
-                  text,
+                child: McformatText(
+                  rawText: text,
                   style: textTheme,
                 ),
               ),
