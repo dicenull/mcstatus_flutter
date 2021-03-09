@@ -12,16 +12,19 @@ class HomeScreen extends HookWidget {
     return SafeArea(
       child: Scaffold(
         body: useProvider(serverProvider.state).when(
-          success: (data) => ServerListBody(
-            cardList: data.servers.map(
-              (state) => ServerCard(
-                namedCounter: NamedCounter(
-                  bgColor: Theme.of(context).accentColor,
-                  badgeColor: state.online ? Colors.green : Colors.redAccent,
-                  text: state.name,
-                  count: state.playerCount,
+          success: (data) => SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: ServerListBody(
+              cardList: data.servers.map(
+                (state) => ServerCard(
+                  namedCounter: NamedCounter(
+                    bgColor: Theme.of(context).accentColor,
+                    badgeColor: state.online ? Colors.green : Colors.redAccent,
+                    text: state.name,
+                    count: state.playerCount,
+                  ),
+                  text: state.description,
                 ),
-                text: state.description,
               ),
             ),
           ),
