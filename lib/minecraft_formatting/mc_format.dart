@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mcstatus_flutter/minecraft_formatting/formatting_code_state.dart';
 
 class _Sentence {
   final String text;
@@ -28,11 +29,15 @@ class McformatText extends StatelessWidget {
 
       final code = sentence[0];
       final text = sentence.substring(1);
+      final state = FormattingCodeState.fromCode(code);
 
       sentences.add(_Sentence(
         text,
-        TextStyle(
-          color: colorPaletteFrom(code),
+        style.copyWith(
+          color: state.style?.color,
+          fontWeight: state.style?.fontWeight,
+          fontStyle: state.style?.fontStyle,
+          decoration: state.style?.decoration,
         ),
       ));
     }
@@ -48,46 +53,5 @@ class McformatText extends StatelessWidget {
       ),
       style: style,
     );
-  }
-
-  Color colorPaletteFrom(String code) {
-    switch (code) {
-      case '0':
-        return Color(0xFF000000);
-      case '1':
-        return Color(0xFF0000AA);
-      case '2':
-        return Color(0xFF00AA00);
-      case '3':
-        return Color(0xFF00AAAA);
-      case '4':
-        return Color(0xFFAA0000);
-      case '5':
-        return Color(0xFFAA00AA);
-      case '6':
-        return Color(0xFFFFAA00);
-      case '7':
-        return Color(0xFFAAAAAA);
-      case '8':
-        return Color(0xFF555555);
-      case '9':
-        return Color(0xFF5555FF);
-      case 'a':
-        return Color(0xFF55FF55);
-      case 'b':
-        return Color(0xFF55FFFF);
-      case 'c':
-        return Color(0xFFFF5555);
-      case 'd':
-        return Color(0xFFFF55FF);
-      case 'e':
-        return Color(0xFFFFFF55);
-      case 'f':
-        return Color(0xFFFFFFFF);
-      case 'g':
-        return Color(0xFFDDD605);
-      default:
-        throw FormatException('Invalid FormattingCode');
-    }
   }
 }
