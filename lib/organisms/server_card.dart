@@ -7,11 +7,13 @@ import 'package:mcstatus_flutter/minecraft_formatting/mc_format.dart';
 class ServerCard extends StatelessWidget {
   final NamedCounter namedCounter;
   final String text;
+  final Widget button;
 
   const ServerCard({
     Key? key,
     required this.namedCounter,
     required this.text,
+    required this.button,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class ServerCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox.shrink(),
+            button,
           ],
         ),
       ),
